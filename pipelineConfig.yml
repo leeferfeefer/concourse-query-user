@@ -1,0 +1,18 @@
+---
+jobs:
+- name: simple
+  plan:
+  - task: simple-task
+    config:
+      platform: darwin
+      run:
+        path: /bin/sh
+        args:
+        - -c
+        - |
+          echo "testing..."
+          NAMES=$(~/Desktop/queryTest/queryUser.sh)
+          while [ "${NAMES}" == "" ]; do
+            :
+          done
+          echo "Hello ${NAMES}"

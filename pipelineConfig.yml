@@ -11,8 +11,6 @@ jobs:
         - -c
         - |
           echo "testing..."
-          NAMES=$(~/Desktop/queryTest/queryUser.sh)
-          while [ "${NAMES}" == "" ]; do
-            :
-          done
-          echo "Hello ${NAMES}"
+#          start go server here
+#          install yarn packages
+#          yarn serve

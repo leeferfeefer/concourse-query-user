@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 # concourse-query-user
 
 ### Want to use Concourse with input parameter functionality?
@@ -34,3 +35,34 @@ Follow this guide to create a Concourse darwin worker: https://github.homedepot.
   * A solution for Windows has not been worked on yet
 * Using the example pipeline configuration assumes you have a darwin worker running
 
+=======
+# query-user
+
+## Project setup
+```
+yarn install
+```
+
+### Compiles and hot-reloads for development
+```
+yarn run serve
+```
+
+### Compiles and minifies for production
+```
+yarn run build
+```
+
+### Run your tests
+```
+yarn run test
+```
+
+### Lints and fixes files
+```
+yarn run lint
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
+>>>>>>> Stashed changes

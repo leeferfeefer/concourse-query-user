@@ -1,16 +1,33 @@
----
+#resources:
+#  - name: query-user-webapp
+#    type: git
+#    source:
+#      uri: https://github.com/leeferfeefer/concourse-query-user.git
+#      branch: webapp
+
+groups:
+  - name: query-user-webapp-poc
+    jobs:
+      - Query User
+
 jobs:
-- name: simple
+- name: Query User
+  max_in_flight: 1
   plan:
-  - task: simple-task
+#  - get: query-user-webapp
+  - task: Query User
+    input_mapping: {input: query-user-webapp}
     config:
       platform: darwin
       run:
         path: /bin/sh
         args:
-        - -c
-        - |
-          echo "testing..."
+          - -c
+          - |
+            echo "testing..."
+            cd ~/go/src/queryUser/server
+            go run server.go
 #          start go server here
 #          install yarn packages
 #          yarn serve
+

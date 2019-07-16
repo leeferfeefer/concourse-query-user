@@ -5,7 +5,6 @@
                 <span>Beggar</span>
             </v-toolbar-title>
         </v-toolbar>
-
         <v-content>
             <QueryUser/>
         </v-content>

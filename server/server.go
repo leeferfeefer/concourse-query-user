@@ -58,7 +58,7 @@ func saveData(w http.ResponseWriter,r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With")
 	w.WriteHeader(http.StatusOK)
 
-	//cancel()
+	cancel()
 }
 
 
@@ -68,7 +68,7 @@ func main() {
 	server := &http.Server{Addr: ":3001"}
 
 	go func() {
-		if err := server.ListenAndServeTLS("server.crt", "server.key"); err != nil {
+		if err := server.ListenAndServe(); err != nil {
 			log.Printf("Httpserver: ListenAndServe() error: %s", err)
 		}
 	}()

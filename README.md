@@ -16,12 +16,12 @@ pipeline while also having the same user input functionality supported by Jenkin
     
 User query in action:
 
-![](https://github.com/leeferfeefer/concourse-query-user/blob/master/images/User%201%20in%20progress.png)
-![](https://github.com/leeferfeefer/concourse-query-user/blob/master/images/User%202%20in%20progress.png) 
+![](https://github.com/leeferfeefer/concourse-query-user/blob/osascript/images/User%201%20in%20progress.png)
+![](https://github.com/leeferfeefer/concourse-query-user/blob/osascript/images/User%202%20in%20progress.png) 
 
 As you can see, the pipeline step will wait until a user has entered input before continuing.   
 
-![](https://github.com/leeferfeefer/concourse-query-user/blob/master/images/complete.png)
+![](https://github.com/leeferfeefer/concourse-query-user/blob/osascript/images/complete.png)
 
 
 

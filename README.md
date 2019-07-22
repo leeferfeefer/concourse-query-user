@@ -19,7 +19,7 @@ As you can see, the pipeline step will wait until a user has entered input befor
 
 
 
-Follow this guide to create a Concourse darwin worker: 
+[Follow this guide to create a Concourse darwin worker](https://github.com/leeferfeefer/concourse-query-user/wiki/Creating-a-darwin-worker) 
 
 
 #### Note:

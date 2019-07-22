@@ -23,6 +23,5 @@ As you can see, the pipeline step will wait until a user has entered input befor
 
 
 #### Note:
-* This solution makes use of osascript which only works for Mac:
-  * A solution for Windows has not been worked on yet
+* This solution makes use of osascript which only works for Mac
 * Using the example pipeline configuration assumes you have a darwin worker running

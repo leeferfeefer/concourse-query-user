@@ -2,14 +2,7 @@
 
 ### Want to use Concourse with input parameter functionality?
 
-By using this example as a guide for your own pipeline configuration, there is no need to depend on Jenkins to finish the 
-final production steps. For my team, we wanted to make use of Concourse's dockerization ability to re-run failing pipeline
-steps without having to restart the entire pipeline process as Jenkins does. But, the downside of using a Concourse pipeline
-is no out of the box functionality that supports user input. For this reason, we chose to use Jenkins to take care of the
-process of pushing code to production with the use of developer credentials gathered from user input. The downside 
-to this set-up is having a production pipeline split between ci-cd providers. This not only leads to managing code in 2 separate 
-areas, but also code written in 2 different formats. Now, with this example, a team can leverage the benefits of a concourse
-pipeline while also having the same user input functionality supported by Jenkins.   
+I wanted to make use of Concourse's dockerization ability to re-run failing pipeline steps without having to restart the entire pipeline process as Jenkins does. But, the downside of using a Concourse pipeline is no out of the box functionality that supports user input. With this example, one can leverage the benefits of a concourse pipeline while also having the same user input functionality supported by Jenkins.   
 
 
   

@@ -1,0 +1,35 @@
+resources:
+  - name: query-user-webapp
+    type: git
+    source:
+      uri: https://github.com/leeferfeefer/concourse-query-user.git
+      branch: ssl_implementation
+
+groups:
+  - name: query-user-webapp-poc
+    jobs:
+      - Query User
+
+jobs:
+- name: Query User
+  max_in_flight: 1
+  plan:
+  - get: query-user-webapp
+  - task: Query User
+    input_mapping: {input: query-user-webapp}
+    config:
+      platform: darwin
+      inputs:
+        - name: input
+      run:
+        path: /bin/bash
+        args:
+          - -c
+          - |
+            set +e
+            cd input/server
+            echo "Go to https://localhost:3001"
+            go run server.go
+            echo
+            echo "Results: "
+            cat output.txt

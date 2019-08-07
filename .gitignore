@@ -5,3 +5,4 @@
 /server/server.csr
 /server/server.key.org
 .yarnrc
+server/output.txt

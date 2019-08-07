@@ -2,28 +2,30 @@ package main
 
 import (
 	"context"
+	b64 "encoding/base64"
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
-	b64 "encoding/base64"
 )
 
-var ctx, cancel = context.WithCancel(context.Background())
+var ctx, kill = context.WithCancel(context.Background())
 
 type DTO struct {
-	Data Data `json:"data"`
-}
-type Data struct {
-	Username string `json:"username"`
-	Password string `json:"password"`
+	Data struct {
+		Username string `json:"username"`
+		Password string `json:"password"`
+	} `json:"data"`
 }
 
 func handleToll(w http.ResponseWriter, r *http.Request) {
 
 	if r.Method == "OPTIONS" {
-		w.Header().Set("Access-Control-Allow-Origin", "*")
+		if origin := r.Header.Get("Origin"); origin != "" {
+			w.Header().Set("Access-Control-Allow-Origin", origin)
+		}
 		w.Header().Set("Access-Control-Allow-Methods", "DELETE, POST, GET, OPTIONS")
 		w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With")
 		w.WriteHeader(http.StatusOK)
@@ -35,55 +37,52 @@ func handleToll(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	saveData(w, r)
+	err := saveData(w, r)
+	if err != nil {
+		handleBadRequest(w, err, "Could not save data")
+		return
+	}
+	w.WriteHeader(http.StatusOK)
+	kill()
 }
 
-func saveData(w http.ResponseWriter,r *http.Request) {
+func saveData(w http.ResponseWriter,r *http.Request) error {
 
 	body, err := ioutil.ReadAll(r.Body)
-	handleBadRequest(w, err)
+	handleErr(err, "Could not read body")
 
 	var dto DTO
-	if err := json.Unmarshal(body, &dto); err != nil {
-		panic(err)
-	}
+	err = json.Unmarshal(body, &dto)
+	handleErr(err, "Could not unmarshal body")
 
 	var decodedUsername, decodedPassword []byte
 	decodedUsername, err = b64.StdEncoding.DecodeString(dto.Data.Username)
-	handleBadRequest(w, err)
+	handleErr(err, "Could not decode username")
 
 	decodedPassword, err = b64.StdEncoding.DecodeString(dto.Data.Password)
-	handleBadRequest(w, err)
+	handleErr(err, "Could not decode password")
 
 	dto.Data.Username = string(decodedUsername)
 	dto.Data.Password = string(decodedPassword)
 
 	body, err = json.Marshal(dto)
-	handleBadRequest(w, err)
+	handleErr(err, "Could not marshal data")
 
 	err = ioutil.WriteFile("output.txt", body, os.ModePerm)
-	if err != nil {
-		log.Printf("Error creating output.txt: %v", err)
-		http.Error(w, "Cannot read body", http.StatusBadRequest)
-		panic(err)
-	}
+	handleErr(err, "Could not write data to file")
 
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Header().Set("Access-Control-Allow-Methods", "DELETE, POST, GET, OPTIONS")
-	w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With")
-	w.WriteHeader(http.StatusOK)
-
-	cancel()
+	return err
 }
 
-func handleBadRequest(w http.ResponseWriter, err error) {
-	if err != nil {
-		log.Printf("Error reading body: %v", err)
-		http.Error(w, "cannot read body", http.StatusBadRequest)
-		panic(err)
-	}
+func handleBadRequest(w http.ResponseWriter, err error, message string) {
+	http.Error(w, fmt.Sprintf("Error: %s - %s", err, message), http.StatusBadRequest)
 }
 
+func handleErr(err error, message string) {
+	if err != nil {
+		log.Printf("Error: %s - %s", err, message)
+	}
+}
 
 func main() {
 	http.Handle("/", http.FileServer(http.Dir("../app/dist/")))

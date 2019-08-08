@@ -43,6 +43,8 @@ func handleToll(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	w.WriteHeader(http.StatusOK)
+
+
 	kill()
 }
 
@@ -91,12 +93,15 @@ func main() {
 	server := &http.Server{Addr: ":3001"}
 
 	go func() {
-		if err := server.ListenAndServeTLS("server.crt", "server.key"); err != nil {
+		if err := server.ListenAndServeTLS("server.crt", "server.key"); err != nil && err != http.ErrServerClosed  {
 			log.Printf("Httpserver: ListenAndServe() error: %s", err)
 		}
 	}()
-	<-ctx.Done()
-	if err := server.Shutdown(ctx); err != nil && err != context.Canceled {
-		log.Println(err)
+
+	select {
+	case <-ctx.Done():
+		if err := server.Shutdown(ctx); err != nil && err != context.Canceled {
+			log.Println(err)
+		}
 	}
 }

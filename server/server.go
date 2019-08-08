@@ -44,7 +44,6 @@ func handleToll(w http.ResponseWriter, r *http.Request) {
 	}
 	w.WriteHeader(http.StatusOK)
 
-
 	kill()
 }
 
@@ -97,11 +96,8 @@ func main() {
 			log.Printf("Httpserver: ListenAndServe() error: %s", err)
 		}
 	}()
-
-	select {
-	case <-ctx.Done():
-		if err := server.Shutdown(ctx); err != nil && err != context.Canceled {
-			log.Println(err)
-		}
+	<-ctx.Done()
+	if err := server.Shutdown(ctx); err != nil && err != context.Canceled {
+		log.Println(err)
 	}
 }

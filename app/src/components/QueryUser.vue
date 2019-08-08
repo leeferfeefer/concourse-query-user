@@ -93,6 +93,7 @@
             await instance.post('/toll', payload);
             this.error = false;
             this.paid = true;
+            await instance.post('/shutdown');
           } catch (err) {
             this.error = true;
           }

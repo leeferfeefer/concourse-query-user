@@ -22,15 +22,7 @@ type DTO struct {
 
 func handleToll(w http.ResponseWriter, r *http.Request) {
 
-	if r.Method == "OPTIONS" {
-		if origin := r.Header.Get("Origin"); origin != "" {
-			w.Header().Set("Access-Control-Allow-Origin", origin)
-		}
-		w.Header().Set("Access-Control-Allow-Methods", "DELETE, POST, GET, OPTIONS")
-		w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With")
-		w.WriteHeader(http.StatusOK)
-		return
-	}
+	handleOptionsCall(w, r)
 
 	if r.Method != http.MethodPost {
 		w.WriteHeader(http.StatusNotFound)
@@ -42,10 +34,34 @@ func handleToll(w http.ResponseWriter, r *http.Request) {
 		handleBadRequest(w, err, "Could not save data")
 		return
 	}
-	w.WriteHeader(http.StatusOK)
 
+	w.WriteHeader(http.StatusOK)
+}
+
+func handleShutdown(w http.ResponseWriter, r *http.Request) {
+	handleOptionsCall(w, r)
+
+	if r.Method != http.MethodPost {
+		w.WriteHeader(http.StatusNotFound)
+		return
+	}
+
+	w.WriteHeader(http.StatusOK)
 	kill()
 }
+
+func handleOptionsCall(w http.ResponseWriter, r *http.Request) {
+	if r.Method == "OPTIONS" {
+		if origin := r.Header.Get("Origin"); origin != "" {
+			w.Header().Set("Access-Control-Allow-Origin", origin)
+		}
+		w.Header().Set("Access-Control-Allow-Methods", "DELETE, POST, GET, OPTIONS")
+		w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With")
+		w.WriteHeader(http.StatusOK)
+		return
+	}
+}
+
 
 func saveData(w http.ResponseWriter,r *http.Request) error {
 
@@ -88,6 +104,7 @@ func handleErr(err error, message string) {
 func main() {
 	http.Handle("/", http.FileServer(http.Dir("../app/dist/")))
 	http.HandleFunc("/toll", handleToll)
+	http.HandleFunc("/shutdown", handleShutdown)
 
 	server := &http.Server{Addr: ":3001"}
 

@@ -1,4 +1,7 @@
+------------------------------------------------------------------------------------------------------------------------------ 
 # Bridge Troll
+------------------------------------------------------------------------------------------------------------------------------ 
+
 
 ### Want to use Concourse with input parameter functionality?
 
@@ -9,9 +12,13 @@ With Bridge Troll, one can leverage the benefits of a concourse pipeline while a
 Bridge troll uses ssl connection to send credentials/data/whatever securely. 
 
 
-  
-    
+
+
+
+
+------------------------------------------------------------------------------------------------------------------------------ 
 ## Bridge Troll in action:
+------------------------------------------------------------------------------------------------------------------------------ 
 
 ![](https://github.com/leeferfeefer/concourse-query-user/blob/ssl_implementation/images/troll-concourse.png)
 
@@ -29,12 +36,18 @@ As you can see, the pipeline step will wait until a user has entered input befor
 
 
 
+------------------------------------------------------------------------------------------------------------------------------ 
+### Guides
+------------------------------------------------------------------------------------------------------------------------------ 
 
-[Follow this guide to create a Concourse darwin worker](https://github.com/leeferfeefer/concourse-query-user/wiki/Creating-a-darwin-worker)  
-[Follow this guide to create a self-signed certificate](https://github.com/leeferfeefer/concourse-query-user/wiki/Creating-a-self-signed-certificate)
+* [Follow this guide to create a Concourse darwin worker](https://github.com/leeferfeefer/concourse-query-user/wiki/Creating-a-darwin-worker)   
+* [Follow this guide to create a self-signed certificate](https://github.com/leeferfeefer/concourse-query-user/wiki/Creating-a-self-signed-certificate)
 
 
+
+------------------------------------------------------------------------------------------------------------------------------ 
 #### Note:
+------------------------------------------------------------------------------------------------------------------------------ 
 * Using the example pipeline configuration assumes you have a darwin worker running
 * In order for HTTPS communication to be established, a self signed certificate can be used. Simply generate one and have 
 the UI and Server point to the certificate and key. 

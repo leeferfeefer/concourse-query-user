@@ -2,7 +2,11 @@
 
 ### Want to use Concourse with input parameter functionality?
 
-I wanted to make use of Concourse's dockerization ability to re-run failing pipeline steps without having to restart the entire pipeline process as Jenkins does. But, the downside of using a Concourse pipeline is no out of the box functionality that supports user input. With Bridge Troll, one can leverage the benefits of a concourse pipeline while also having the same user input functionality supported by Jenkins.   
+I wanted to make use of Concourse's dockerization ability to re-run failing pipeline steps without having to restart the entire pipeline process as Jenkins does. But, the downside of using a Concourse pipeline is no out of the box functionality that supports user input. So, I created Bridge Troll.
+
+With Bridge Troll, one can leverage the benefits of a concourse pipeline while also having the same user input functionality supported by Jenkins. 
+
+Bridge troll uses ssl connection to send credentials/data/whatever securely. 
 
 
   

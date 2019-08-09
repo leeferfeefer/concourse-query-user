@@ -1,4 +1,4 @@
-# concourse-query-user
+# Bridge Troll
 
 ### Want to use Concourse with input parameter functionality?
 
@@ -11,7 +11,7 @@ Bridge troll uses ssl connection to send credentials/data/whatever securely.
 
   
     
-Bridge Troll in action:
+## Bridge Troll in action:
 
 ![](https://github.com/leeferfeefer/concourse-query-user/blob/ssl_implementation/images/troll-concourse.png)
 

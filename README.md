@@ -2,19 +2,26 @@
 
 ### Want to use Concourse with input parameter functionality?
 
-I wanted to make use of Concourse's dockerization ability to re-run failing pipeline steps without having to restart the entire pipeline process as Jenkins does. But, the downside of using a Concourse pipeline is no out of the box functionality that supports user input. With this example, one can leverage the benefits of a concourse pipeline while also having the same user input functionality supported by Jenkins.   
+I wanted to make use of Concourse's dockerization ability to re-run failing pipeline steps without having to restart the entire pipeline process as Jenkins does. But, the downside of using a Concourse pipeline is no out of the box functionality that supports user input. With Bridge Troll, one can leverage the benefits of a concourse pipeline while also having the same user input functionality supported by Jenkins.   
 
 
   
     
-User query in action:
+Bridge Troll in action:
 
-![](https://github.com/leeferfeefer/concourse-query-user/blob/master/images/User%201%20in%20progress.png)
-![](https://github.com/leeferfeefer/concourse-query-user/blob/master/images/User%202%20in%20progress.png) 
+![](https://github.com/leeferfeefer/concourse-query-user/blob/ssl_implementation/images/troll-concourse.png)
+
+After going to https://localhost:3001:
+![](https://github.com/leeferfeefer/concourse-query-user/blob/ssl_implementation/images/troll.png) 
+
+After entering credentials:
+![](https://github.com/leeferfeefer/concourse-query-user/blob/ssl_implementation/images/troll%20toll%20paid.png) 
+
+Bridge Troll even has input validation:
+![](https://github.com/leeferfeefer/concourse-query-user/blob/ssl_implementation/images/troll-validation.png) 
 
 As you can see, the pipeline step will wait until a user has entered input before continuing.   
-
-![](https://github.com/leeferfeefer/concourse-query-user/blob/master/images/complete.png)
+![](https://github.com/leeferfeefer/concourse-query-user/blob/ssl_implementation/images/troll%20concourse%20done.png)
 
 
 
